@@ -10,7 +10,7 @@ from keras import utils
 # dimensions of our images.
 img_width, img_height = 150, 150
 
-train_data_dir = '/run/media/sourav/Work/Works/Gesture Recog/data'
+train_data_dir = './data'
 #validation_data_dir = 'data/validation'
 nb_train_samples = 1000
 #nb_validation_samples = 800
@@ -62,18 +62,11 @@ train_generator = train_datagen.flow_from_directory(
     target_size=(img_width, img_height),
     batch_size=batch_size,
     class_mode='categorical')
-'''
-validation_generator = test_datagen.flow_from_directory(
-    validation_data_dir,
-    target_size=(img_width, img_height),
-    batch_size=batch_size,
-    class_mode='categorical')
-'''
+
 model.fit_generator(
     train_generator,
     steps_per_epoch=nb_train_samples // batch_size,
     epochs=epochs)
-    #validation_data=validation_generator,
-    #validation_steps=nb_validation_samples // batch_size)
+
 model.save_weights('./model_weights.h5')
 model.save('./whole_model.h5')
