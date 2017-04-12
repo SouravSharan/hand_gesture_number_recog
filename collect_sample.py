@@ -5,10 +5,8 @@ from keras.models import load_model
 import numpy as np
 
 cap = cv2.VideoCapture(0)
-counter = []
-for i in range(0,7):
-    counter.append(0);
-model = load_model('CNN2/whole_model.h5')
+
+model = load_model('./whole_model.h5') #load saved model
 while(cap.isOpened()):
     ret, img = cap.read()
     cv2.rectangle(img,(0,0),(200,200),(0,255,0),0)
@@ -22,8 +20,7 @@ while(cap.isOpened()):
     cv2.imshow('Thresholded', thresh1)
 
     k = cv2.waitKey(10)
-    #cv2.imwrite("/run/media/sourav/Work/Works/Gesture Recog/data/0/counter[0].jpg",thresh1)
-    if k == 49:
+    if k == 49: #1
         cv2.imwrite('./thresh.jpg', thresh1)
         thresh = cv2.imread('./thresh.jpg')
         thresh = cv2.resize(thresh, (150,150))
